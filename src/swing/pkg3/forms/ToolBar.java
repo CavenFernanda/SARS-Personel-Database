@@ -12,7 +12,7 @@ public class ToolBar extends JPanel implements ActionListener {
     private StringListener textListener;
 
     public ToolBar() {
-        
+
         setBorder(BorderFactory.createEtchedBorder()); //creating a border for the toolBar. Its essenstially a line
         this.helloButton = new JButton("Hello");
         this.byeButton = new JButton("Button");

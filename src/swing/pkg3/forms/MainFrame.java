@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
         JMenuItem exportDataItem = new JMenuItem("Export Data...");
         JMenuItem importDataItem = new JMenuItem("Import Data...");
         JMenuItem exitItem = new JMenuItem("Exit");
-        
+
         fileMenu.add(exportDataItem);
         fileMenu.add(importDataItem);
         fileMenu.addSeparator();//create a space between groups
@@ -62,26 +62,37 @@ public class MainFrame extends JFrame {
 
         JMenu windowMenu = new JMenu("Window");
         JMenu showMenu = new JMenu("Show");
-        
+
         JCheckBoxMenuItem showFormItem = new JCheckBoxMenuItem("Person Form");
         showFormItem.setSelected(true);
-        
+
         showMenu.add(showFormItem);
         windowMenu.add(showMenu);
-        
 
         menuBar.add(fileMenu);
         menuBar.add(windowMenu);
-        
-        showFormItem.addActionListener(new ActionListener(){
+
+        showFormItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               JCheckBoxMenuItem menuItem = (JCheckBoxMenuItem)e.getSource();
-               
-               formPanel.setVisible(menuItem.isSelected());
-            }      
+                JCheckBoxMenuItem menuItem = (JCheckBoxMenuItem) e.getSource();
+
+                formPanel.setVisible(menuItem.isSelected());
+            }
         });
+
+        fileMenu.setMnemonic(KeyEvent.VK_F);
+        exitItem.setMnemonic(KeyEvent.VK_X);
         
+        exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
+
+        exitItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
         return menuBar;
     }
 }

@@ -3,8 +3,7 @@ package swing.pkg3.forms;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.border.Border;
 
 public class FormPanel extends JPanel {
@@ -25,7 +24,6 @@ public class FormPanel extends JPanel {
     private JLabel taxLabel;
     private JRadioButton maleRadio, femaleRadio;
     private ButtonGroup genderGroup;
-    
 
     public FormPanel() {
         Dimension dimension = getPreferredSize(); //setting the size of a form component
@@ -49,19 +47,27 @@ public class FormPanel extends JPanel {
         this.genderGroup = new ButtonGroup();
         this.submitButton = new JButton("Submit");
         
+        //Setting up Mnemonics
+        submitButton.setMnemonic(KeyEvent.VK_S);
+        nameL.setDisplayedMnemonic(KeyEvent.VK_N);
+        nameL.setLabelFor(nameTF);
+        
+        occupationL.setDisplayedMnemonic(KeyEvent.VK_O);
+        occupationL.setLabelFor(occupationL);
+
         //Setting up gener radios
         genderGroup.add(maleRadio);
         genderGroup.add(femaleRadio);
-        
+
         maleRadio.setActionCommand("male");
         femaleRadio.setActionCommand("male");
         maleRadio.setSelected(true);
-        
+
         //Setting up tax ID///
         taxLabel.setEnabled(false); //By default this will be disabled
         taxField.setEnabled(false); //By default this will be disabled
-        
-        citizenship.addActionListener(new ActionListener(){
+
+        citizenship.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean isTicked = citizenship.isSelected(); //if the citizenship is clicked
@@ -100,10 +106,10 @@ public class FormPanel extends JPanel {
                 String employment = (String) employmentCombo.getSelectedItem();
                 String taxID = taxField.getText();
                 boolean saCitizen = citizenship.isSelected();
-                
+
                 String gender = genderGroup.getSelection().getActionCommand(); //will return the selected radio button
 
-                FormEvent formEvent = new FormEvent(this, name, occupation, ageCategory.getID(), employment,taxID,saCitizen,gender); //Passsing what the user entered to be stored in class FormEvent
+                FormEvent formEvent = new FormEvent(this, name, occupation, ageCategory.getID(), employment, taxID, saCitizen, gender); //Passsing what the user entered to be stored in class FormEvent
 
                 if (formListener != null) {
 
@@ -201,7 +207,7 @@ public class FormPanel extends JPanel {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(citizenship, gc);
-        
+
         //-------SIXTH ROW (TaX ID)---------/// 
         gc.gridy++;
         gc.weightx = 1; //padding
@@ -215,7 +221,7 @@ public class FormPanel extends JPanel {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(taxField, gc);
-        
+
         //-------SEVENTH ROW (male RADIO BUTTON)---------/// 
         gc.gridy++;
         gc.weightx = 1; //padding
@@ -229,7 +235,7 @@ public class FormPanel extends JPanel {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(maleRadio, gc);
-        
+
         //-------EIGTH ROW (female RADIO BUTTON)---------/// 
         gc.gridy++;
         gc.weightx = 1; //padding
@@ -242,7 +248,7 @@ public class FormPanel extends JPanel {
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         add(femaleRadio, gc);
-        
+
         //-------NINTH ROW (Submit Button)---------///
         gc.gridy++;
         gc.weightx = 1; //padding

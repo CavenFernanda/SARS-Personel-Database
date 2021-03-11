@@ -39,7 +39,6 @@ public class FormEvent extends EventObject {
 
     public int getAgeCategory() {
         return ageCategory;
-        
     }
 
     public String getEmployment() {
