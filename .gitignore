@@ -1,6 +1,6 @@
 #files on folders that will be ignored by GIT
 
-/nbproject/
+/nbproject
 build.xml
 manifest.mf
 /build/
