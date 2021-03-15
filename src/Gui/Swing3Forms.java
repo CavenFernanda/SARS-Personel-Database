@@ -1,4 +1,4 @@
-package swing.pkg3.forms;
+package Gui;
 
 public class Swing3Forms {
 

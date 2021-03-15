@@ -1,5 +1,5 @@
 //this is the left hand size of the gui. Think of it as a navigation bar
-package swing.pkg3.forms;
+package Gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,20 +10,20 @@ public class FormPanel extends JPanel {
 
     private final JLabel nameL;
     private final JLabel occupationL;
-    private JTextField nameTF;
-    private JTextField occupationTF;
+    private final JTextField nameTF;
+    private final JTextField occupationTF;
     private final JButton submitButton;
     private FormListener formListener;
-    private JList ageList;
+    private final JList ageList;
     private final JLabel ageL;
     private final JComboBox employmentCombo;
     private final JLabel employmentComboL;
     private final JCheckBox citizenship;
     private final JLabel citizenshipL;
     private final JTextField taxField;
-    private JLabel taxLabel;
-    private JRadioButton maleRadio, femaleRadio;
-    private ButtonGroup genderGroup;
+    private final JLabel taxLabel;
+    private final JRadioButton maleRadio, femaleRadio;
+    private final ButtonGroup genderGroup;
 
     public FormPanel() {
         Dimension dimension = getPreferredSize(); //setting the size of a form component
@@ -55,7 +55,7 @@ public class FormPanel extends JPanel {
         occupationL.setDisplayedMnemonic(KeyEvent.VK_O);
         occupationL.setLabelFor(occupationL);
 
-        //Setting up gener radios
+        //Setting up gender radios
         genderGroup.add(maleRadio);
         genderGroup.add(femaleRadio);
 
@@ -84,7 +84,7 @@ public class FormPanel extends JPanel {
         ageModel.addElement(new AgeCategory(2, "65 or over"));
         ageList.setModel(ageModel); //setting the list
         ageList.setPreferredSize(new Dimension(110, 68)); //setting the font size of the list
-        ageList.setBorder(BorderFactory.createEtchedBorder()); //creating border arround list      
+        ageList.setBorder(BorderFactory.createEtchedBorder()); //creating border around list
         ageList.setSelectedIndex(1); //selecting default selected value
 
         //Creating the employment combobox
@@ -109,7 +109,7 @@ public class FormPanel extends JPanel {
 
                 String gender = genderGroup.getSelection().getActionCommand(); //will return the selected radio button
 
-                FormEvent formEvent = new FormEvent(this, name, occupation, ageCategory.getID(), employment, taxID, saCitizen, gender); //Passsing what the user entered to be stored in class FormEvent
+                FormEvent formEvent = new FormEvent(this, name, occupation, ageCategory.getID(), employment, taxID, saCitizen, gender); //Passing what the user entered to be stored in class FormEvent
 
                 if (formListener != null) {
 

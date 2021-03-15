@@ -3,3 +3,7 @@
 /nbproject/
 build.xml
 manifest.mf
+
+/SARS-Personel-Database.iml
+/.idea/
+/out
