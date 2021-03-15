@@ -1,24 +1,19 @@
-package swing.pkg3.forms;
+package Model;
 
-import java.util.EventObject;
+public class Person {
 
-public class FormEvent extends EventObject {
+    private static int count = 0;//just to count how many people there are and to make an ID
 
+    private int id;
     private String name;
     private String occupation;
-    private int ageCategory;
+    private EmploymentCategory ageCategory;
     private String employment;
     private String taxID;
     private boolean saCitizen;
-    private String gender;
+    private Gender gender;
 
-    public FormEvent(Object source) {
-        super(source); //source will be the button from FormPanel that will raise the event
-
-    }
-
-    public FormEvent(Object source, String name, String occupation, int ageCategory, String employment, String taxID, boolean saCitizen,String gender) {
-        super(source); //source will be the button from FormPanel that will raise the event
+    public Person(String name, String occupation, EmploymentCategory ageCategory, String employment, String taxID, boolean saCitizen, Gender gender) {
         this.name = name;
         this.occupation = occupation;
         this.ageCategory = ageCategory;
@@ -27,6 +22,12 @@ public class FormEvent extends EventObject {
         this.saCitizen = saCitizen;
         this.gender = gender;
 
+        this.id = count;
+        count++;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -37,7 +38,7 @@ public class FormEvent extends EventObject {
         return occupation;
     }
 
-    public int getAgeCategory() {
+    public EmploymentCategory getAgeCategory() {
         return ageCategory;
     }
 
@@ -49,17 +50,19 @@ public class FormEvent extends EventObject {
         return taxID;
     }
 
-    public boolean getSaCitizen() {
-
+    public boolean isSaCitizen() {
         return saCitizen;
     }
-    
-    public String getGender(){
+
+    public Gender getGender() {
         return gender;
     }
 
-    public void setName(String name) {
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -67,25 +70,23 @@ public class FormEvent extends EventObject {
         this.occupation = occupation;
     }
 
-    public void setAgeCategory(int ageCategory) {
-
+    public void setAgeCategory(EmploymentCategory ageCategory) {
         this.ageCategory = ageCategory;
     }
 
     public void setEmployment(String employment) {
-
         this.employment = employment;
     }
-    
-    public void setTaxID(String taxID){
-        this.taxID  = taxID;
+
+    public void setTaxID(String taxID) {
+        this.taxID = taxID;
     }
-    
-    public void setSaCitizen(boolean saCitizen){
+
+    public void setSaCitizen(boolean saCitizen) {
         this.saCitizen = saCitizen;
     }
-    
-    public void getGender(String gender){
+
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 }

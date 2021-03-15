@@ -1,4 +1,4 @@
-package swing.pkg3.forms;
+package Gui;
 
 import javax.swing.*;
 
