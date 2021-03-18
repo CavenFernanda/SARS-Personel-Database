@@ -7,13 +7,13 @@ public class Person {
     private int id;
     private String name;
     private String occupation;
-    private EmploymentCategory ageCategory;
+    private AgeCategory ageCategory;
     private String employment;
     private String taxID;
     private boolean saCitizen;
     private Gender gender;
 
-    public Person(String name, String occupation, EmploymentCategory ageCategory, String employment, String taxID, boolean saCitizen, Gender gender) {
+    public Person(String name, String occupation, AgeCategory ageCategory, String employment, String taxID, boolean saCitizen, Gender gender) {
         this.name = name;
         this.occupation = occupation;
         this.ageCategory = ageCategory;
@@ -38,7 +38,7 @@ public class Person {
         return occupation;
     }
 
-    public EmploymentCategory getAgeCategory() {
+    public AgeCategory getAgeCategory() {
         return ageCategory;
     }
 
@@ -70,7 +70,7 @@ public class Person {
         this.occupation = occupation;
     }
 
-    public void setAgeCategory(EmploymentCategory ageCategory) {
+    public void setAgeCategory(AgeCategory ageCategory) {
         this.ageCategory = ageCategory;
     }
 

@@ -1,5 +1,6 @@
 package Gui;
 
+import Controller.Controller;
 import swing.pkg3.forms.PersonFileFilter;
 
 import javax.swing.*;
@@ -12,16 +13,22 @@ public class MainFrame extends JFrame {
     private final ToolBar toolBar;
     private final FormPanel formPanel;
     private JFileChooser fileChooser;
+    private Controller controller;
+
 
     public MainFrame() {
 
         super("Hello World");
+
+        setLayout(new BorderLayout());
+
         this.toolBar = new ToolBar();
         this.textPanel = new TextPanel();
         this.formPanel = new FormPanel();
         this.fileChooser = new JFileChooser();
-        fileChooser.addChoosableFileFilter(new PersonFileFilter()); //filtering the files to choose from
+        this.controller = new Controller();
 
+        fileChooser.addChoosableFileFilter(new PersonFileFilter()); //filtering the files to choose from
 
         setJMenuBar(createMenuBar());
 
@@ -32,13 +39,8 @@ public class MainFrame extends JFrame {
             @Override
             public void formEventOccurred(FormEvent e) {
 
-                String name = e.getName();
-                String occupation = e.getOccupation();
-                int ageCategory = e.getAgeCategory();
-                String employment = e.getEmployment();
-                String gender = e.getGender();
 
-                textPanel.apendText("Name: " + name + " \nOccupation: " + occupation + "\nAge Category: " + ageCategory + "\nEmployment Status: " + employment + "\nGender: " + gender + "\n-----------------------------\n");
+                controller.addPerson(e);
             }
         });
 
@@ -99,28 +101,28 @@ public class MainFrame extends JFrame {
                 //this tells the dialog where to appear and what its parent class is
                if (fileChooser.showOpenDialog(MainFrame.this) ==JFileChooser.APPROVE_OPTION){
                    System.out.println(fileChooser.getSelectedFile()); //Returns file object
-               } 
-                
-            }  
+               }
+
+            }
         });
-        
+
         exportDataItem.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 //this tells the dialog where to appear and what its parent class is
                if (fileChooser.showSaveDialog(MainFrame.this) ==JFileChooser.APPROVE_OPTION){
                    System.out.println(fileChooser.getSelectedFile()); //Returns file object
-               } 
-                
-            }  
+               }
+
+            }
         });
-        
+
         //This method will is able to exit the programe. User will be prompted to confirmr action
         exitItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                int action = JOptionPane.showConfirmDialog(MainFrame.this, "Do you really want to exit the application?", "Confirm Exit",JOptionPane.OK_CANCEL_OPTION);
-               
+
                if (action == JOptionPane.OK_OPTION){
                 System.exit(0);
                }
