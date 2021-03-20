@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swing.pkg3.forms;
+package Gui;
 
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
@@ -19,7 +19,7 @@ public class PersonFileFilter extends FileFilter{
         }
         
         String name = f.getName();
-        String extension = Utils.getFileExtension(name);
+        String extension = swing.pkg3.forms.Utils.getFileExtension(name);
         
         if(extension == null){
         return false;
