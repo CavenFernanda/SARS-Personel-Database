@@ -12,9 +12,9 @@ public class MainFrame extends JFrame {
     private final TextPanel textPanel;
     private final ToolBar toolBar;
     private final FormPanel formPanel;
-    private JFileChooser fileChooser;
-    private Controller controller;
-    private TablePanel tablePanel;
+    private final JFileChooser fileChooser;
+    private final Controller controller;
+    private final TablePanel tablePanel;
 
 
     public MainFrame() {
@@ -95,7 +95,7 @@ public class MainFrame extends JFrame {
 
         fileMenu.setMnemonic(KeyEvent.VK_F);
         exitItem.setMnemonic(KeyEvent.VK_X);
-        exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
+        exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
 
         //This method will open the systems files
         importDataItem.addActionListener(new ActionListener(){
@@ -120,7 +120,7 @@ public class MainFrame extends JFrame {
             }
         });
 
-        //This method will is able to exit the programe. User will be prompted to confirmr action
+        //This method will is able to exit the programme. User will be prompted to confirm action
         exitItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
