@@ -4,10 +4,16 @@ package Controller;
 import Gui.FormEvent;
 import Model.*;
 
+import java.util.List;
+
 //Mainframe will call this class when added data to the database
 public class Controller {
 
     Database database = new Database();
+
+    public List<Person> getPeople (){
+        return database.getPeople();
+    }
 
     public void addPerson(FormEvent ev) {
 
