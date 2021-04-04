@@ -1,6 +1,8 @@
 package Model;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
 
     private static int count = 0;//just to count how many people there are and to make an ID
 

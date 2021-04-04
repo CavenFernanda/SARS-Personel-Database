@@ -4,6 +4,8 @@ package Controller;
 import Gui.FormEvent;
 import Model.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 //Mainframe will call this class when added data to the database
@@ -64,5 +66,14 @@ public class Controller {
 
         Person person = new Person(name, occupation,ageCategory, empCat,taxID,citizen,genderCat);
         database.addPerson(person);
+    }
+
+    //This method will call the serializable method in the Database class. It will enable the user to save data
+    public void saveToFile(File file) throws IOException{
+       database.saveToFile(file);
+    }
+
+    public void loadFromFile(File file)throws IOException{
+        database.loadFormFile(file);
     }
 }

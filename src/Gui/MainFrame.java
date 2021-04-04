@@ -6,6 +6,7 @@ import Controller.Controller;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class MainFrame extends JFrame {
 
@@ -103,6 +104,12 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //this tells the dialog where to appear and what its parent class is
                if (fileChooser.showOpenDialog(MainFrame.this) ==JFileChooser.APPROVE_OPTION){
+                   try {
+                       controller.loadFromFile(fileChooser.getSelectedFile());
+                       tablePanel.refresh();
+                   } catch (IOException ioException) {
+                       JOptionPane.showMessageDialog(MainFrame.this,"Could not load data from file","ERROR", JOptionPane.ERROR_MESSAGE);
+                   }
                    System.out.println(fileChooser.getSelectedFile()); //Returns file object
                }
 
@@ -114,6 +121,12 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //this tells the dialog where to appear and what its parent class is
                if (fileChooser.showSaveDialog(MainFrame.this) ==JFileChooser.APPROVE_OPTION){
+                   System.out.println(fileChooser.getSelectedFile()); //Returns file object
+                   try {
+                       controller.saveToFile(fileChooser.getSelectedFile());
+                   } catch (IOException ioException) {
+                       JOptionPane.showMessageDialog(MainFrame.this,"Could not save data to file","ERROR", JOptionPane.ERROR_MESSAGE);
+                   }
                    System.out.println(fileChooser.getSelectedFile()); //Returns file object
                }
 
