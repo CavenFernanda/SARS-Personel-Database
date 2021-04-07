@@ -17,6 +17,10 @@ public class Controller {
         return database.getPeople();
     }
 
+    public void removePerson(int row) {
+        database.removePerson(row);
+    }
+
     public void addPerson(FormEvent ev) {
 
         String name = ev.getName();
