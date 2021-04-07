@@ -1,6 +1,7 @@
 package Gui;
 
 import Controller.Controller;
+import com.sun.xml.internal.ws.wsdl.writer.document.Import;
 
 
 import javax.swing.*;
@@ -96,7 +97,9 @@ public class MainFrame extends JFrame {
 
         fileMenu.setMnemonic(KeyEvent.VK_F);
         exitItem.setMnemonic(KeyEvent.VK_X);
+
         exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
+        importDataItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK)); //adding new accelerator. Basically shortcut
 
         //This method will open the systems files
         importDataItem.addActionListener(new ActionListener(){
