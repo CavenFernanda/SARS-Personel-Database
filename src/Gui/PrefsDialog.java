@@ -10,6 +10,8 @@ public class PrefsDialog extends JDialog {
     private JButton okButton, cancelButton;
     private JSpinner portSpinner;
     private SpinnerNumberModel spinnerModel;
+    private JTextField userField;
+    private JPasswordField passwordField;
 
     public PrefsDialog(JFrame parent){
         super(parent, "Preferences", false);
@@ -20,11 +22,46 @@ public class PrefsDialog extends JDialog {
         spinnerModel = new SpinnerNumberModel(3306,0,9999,1);
         portSpinner = new JSpinner(spinnerModel);
 
+        userField = new JTextField(10);
+        passwordField = new JPasswordField(10);
+
+        passwordField.setEchoChar('*');
+
         setLayout(new GridBagLayout());
 
         GridBagConstraints gc = new GridBagConstraints();
 
         gc.gridy =0;
+
+        /////////////FIRST ROW////////////////////////
+        gc.weightx = 1;
+        gc.weighty = 1;
+        gc.fill = GridBagConstraints.NONE;
+
+        gc.gridx = 0;
+
+        add(new JLabel("User: "), gc);
+
+        gc.gridx++;
+        add(userField,gc);
+
+        /////////////////Next Row////////////////////
+        gc.gridy++;
+
+        gc.weightx = 1;
+        gc.weighty = 1;
+        gc.fill = GridBagConstraints.NONE;
+
+        gc.gridx = 0;
+
+        add(new JLabel("Password: "), gc);
+
+        gc.gridx++;
+        add(passwordField,gc);
+
+        /////////////////Next Row////////////////////
+        gc.gridy++;
+
         gc.weightx = 1;
         gc.weighty = 1;
         gc.fill = GridBagConstraints.NONE;
@@ -51,7 +88,10 @@ public class PrefsDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 Integer value = (Integer)portSpinner.getValue(); //Get value returns an object and portspinner returns an int. Hence portspinner is being casted to an int
 
-                System.out.println(value);
+                String user = userField.getText();
+                char[] password = passwordField.getPassword();
+                System.out.println(user+ ": "+ new String(password));
+
                 setVisible(false);
             }
         });
