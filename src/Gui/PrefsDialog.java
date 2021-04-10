@@ -12,6 +12,7 @@ public class PrefsDialog extends JDialog {
     private SpinnerNumberModel spinnerModel;
     private JTextField userField;
     private JPasswordField passwordField;
+    private PrefsListener prefsListener;
 
     public PrefsDialog(JFrame parent){
         super(parent, "Preferences", false);
@@ -86,11 +87,14 @@ public class PrefsDialog extends JDialog {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Integer value = (Integer)portSpinner.getValue(); //Get value returns an object and portspinner returns an int. Hence portspinner is being casted to an int
+                Integer port = (Integer)portSpinner.getValue(); //Get value returns an object and portspinner returns an int. Hence portspinner is being casted to an int
 
                 String user = userField.getText();
                 char[] password = passwordField.getPassword();
-                System.out.println(user+ ": "+ new String(password));
+
+                if(prefsListener != null){
+                    prefsListener.preferencesSet(user,new String(password),port);
+                }
 
                 setVisible(false);
             }
@@ -105,5 +109,15 @@ public class PrefsDialog extends JDialog {
 
         setSize(400,300);
         setLocationRelativeTo(parent); //Preferences menu will pop up relative to the programme
+    }
+
+    public void setDefault(String user, String password, int port){
+        userField.setText(user);
+        passwordField.setText(password);
+        portSpinner.setValue(port);
+    }
+
+    public void setPrefsListener(PrefsListener prefsListener) {
+        this.prefsListener = prefsListener;
     }
 }

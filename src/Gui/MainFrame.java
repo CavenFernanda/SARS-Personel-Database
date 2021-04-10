@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 public class MainFrame extends JFrame {
 
@@ -18,6 +19,7 @@ public class MainFrame extends JFrame {
     private final Controller controller;
     private final TablePanel tablePanel;
     private final PrefsDialog prefsDialog;
+    private Preferences preferences;
 
 
     public MainFrame() {
@@ -34,6 +36,8 @@ public class MainFrame extends JFrame {
         this.tablePanel = new TablePanel();
         this.prefsDialog = new PrefsDialog(this);
 
+        preferences = Preferences.userRoot().node("DB");
+
         tablePanel.setData(controller.getPeople());
 
         tablePanel.setPersonTableListener(new PersonTableListener() {
@@ -42,6 +46,20 @@ public class MainFrame extends JFrame {
             }
         });
 
+        prefsDialog.setPrefsListener(new PrefsListener(){
+            @Override
+            public void preferencesSet(String user, String password, int port) {
+                preferences.put("user",user);
+                preferences.put("password",password);
+                preferences.putInt("port",port);
+            }
+        });
+
+        String user = preferences.get("user","");
+        String password = preferences.get("password","");
+        Integer port = preferences.getInt("port",3306);
+
+        prefsDialog.setDefault(user,password,port);
         fileChooser.addChoosableFileFilter(new PersonFileFilter()); //filtering the files to choose from
 
         setJMenuBar(createMenuBar());
