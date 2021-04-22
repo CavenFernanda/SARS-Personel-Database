@@ -4,18 +4,18 @@ import java.io.Serializable;
 
 public class Person implements Serializable {
 
-    private static int count = 0;//just to count how many people there are and to make an ID
+    private static int count = 1;//just to count how many people there are and to make an ID
 
     private int id;
     private String name;
     private String occupation;
     private AgeCategory ageCategory;
-    private String employment;
+    private EmploymentCategory employment;
     private String taxID;
     private boolean saCitizen;
     private Gender gender;
 
-    public Person(String name, String occupation, AgeCategory ageCategory, String employment, String taxID, boolean saCitizen, Gender gender) {
+    public Person(String name, String occupation, AgeCategory ageCategory, EmploymentCategory employment, String taxID, boolean saCitizen, Gender gender) {
         this.name = name;
         this.occupation = occupation;
         this.ageCategory = ageCategory;
@@ -44,7 +44,7 @@ public class Person implements Serializable {
         return ageCategory;
     }
 
-    public String getEmployment() {
+    public EmploymentCategory getEmployment() {
         return employment;
     }
 
@@ -76,7 +76,7 @@ public class Person implements Serializable {
         this.ageCategory = ageCategory;
     }
 
-    public void setEmployment(String employment) {
+    public void setEmployment(EmploymentCategory employment) {
         this.employment = employment;
     }
 

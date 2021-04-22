@@ -1,10 +1,11 @@
 package Model;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
 import java.io.*;
-import java.sql.Connection;
+import java.sql.*;
 
 //database class that contains an arrayList of people
 public class Database {
@@ -35,6 +36,29 @@ public class Database {
             } catch (SQLException throwables) {
                 System.out.println("Unable to close connection");            }
         }
+    }
+    //will save the whole database into the mysql database
+    public void save() throws SQLException {
+
+        String checkSql = "Select count(*) as count from people where id =?";//value '?' is ued to protect the database from malicious sql injections
+
+        PreparedStatement checkStmt = con.prepareStatement(checkSql);//executing mySql commands
+
+        //looping through all the values in the linked list of Person
+        for(Person person: peopleList){
+            int id = person.getId();
+
+            checkStmt.setInt(1,id);
+
+            ResultSet checkResult = checkStmt.executeQuery();
+            checkResult.next();
+
+            int count = checkResult.getInt(1);
+
+            System.out.println("Count for person with ID: "+id+ " is "+count);
+        }
+
+        checkStmt.close();
     }
 
     public void addPerson(Person person) {

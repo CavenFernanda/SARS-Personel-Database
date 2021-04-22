@@ -1,4 +1,6 @@
-import Model.Database;
+import Model.*;
+
+import java.sql.SQLException;
 
 public class TestDatabase {
     public static void main(String[] args) {
@@ -9,6 +11,15 @@ public class TestDatabase {
             db.connect();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        db.addPerson(new Person("Siya","Financial Analyst", AgeCategory.adult, EmploymentCategory.employed,"777777",true, Gender.male));
+        db.addPerson(new Person("Jenny","Software Engineer", AgeCategory.senior, EmploymentCategory.selfEmployed,"515177",true, Gender.female));
+
+        try {
+            db.save();
+        } catch (SQLException throwables) {
+            System.out.println("Unable to save");
         }
         db.disconnect();
     }

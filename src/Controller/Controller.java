@@ -46,7 +46,7 @@ public class Controller {
 
         }
 
-        EmploymentCategory employmentCategory;
+        EmploymentCategory employmentCategory = null;
 
         switch (empCat) {
             case "employed":
@@ -68,7 +68,7 @@ public class Controller {
             genderCat = Gender.female;
         }
 
-        Person person = new Person(name, occupation,ageCategory, empCat,taxID,citizen,genderCat);
+        Person person = new Person(name, occupation,ageCategory, employmentCategory,taxID,citizen,genderCat);
         database.addPerson(person);
     }
 
