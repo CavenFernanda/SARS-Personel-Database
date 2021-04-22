@@ -1,15 +1,40 @@
 package Model;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.*;
 import java.io.*;
+import java.sql.Connection;
 
 //database class that contains an arrayList of people
 public class Database {
 
     private List<Person> peopleList;
+    private Connection con;
 
     public Database() {
         peopleList = new LinkedList<Person>();
+    }
+
+    public void connect() throws Exception{
+
+        if(con != null) return;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+           throw new Exception("Driver not found");
+        }
+        String url = "jdbc:mysql://localhost:3306/swingtest";
+        con = DriverManager.getConnection(url,"root","0826888397Cf%%");
+
+    }
+    public void disconnect(){
+        if(con != null){
+            try {
+                con.close();
+            } catch (SQLException throwables) {
+                System.out.println("Unable to close connection");            }
+        }
     }
 
     public void addPerson(Person person) {
