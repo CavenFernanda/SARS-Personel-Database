@@ -26,7 +26,7 @@ public class Database {
            throw new Exception("Driver not found");
         }
         String url = "jdbc:mysql://localhost:3306/swingtest";
-        con = DriverManager.getConnection(url,"root","0826888397Cf%%");
+        con = DriverManager.getConnection(url,"root","0826888397Cf%");
 
     }
     public void disconnect(){
