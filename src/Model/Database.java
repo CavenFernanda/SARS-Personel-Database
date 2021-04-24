@@ -41,12 +41,21 @@ public class Database {
     public void save() throws SQLException {
 
         String checkSql = "Select count(*) as count from people where id =?";//value '?' is ued to protect the database from malicious sql injections
-
         PreparedStatement checkStmt = con.prepareStatement(checkSql);//executing mySql commands
+
+        String insertSql = "insert into People (id, name,age, employment_status, tax_id,sa_citizenship, gender, occupation) values (?,?,?,?,?,?,?,?)";
+        PreparedStatement insertStatement = con.prepareStatement(insertSql);
 
         //looping through all the values in the linked list of Person
         for(Person person: peopleList){
             int id = person.getId();
+            String name = person.getName();
+            String occupation = person.getOccupation();
+            AgeCategory age = person.getAgeCategory();
+            EmploymentCategory employment = person.getEmployment();
+            String tax = person.getTaxID();
+            boolean isSa = person.isSaCitizen();
+            Gender gender = person.getGender();
 
             checkStmt.setInt(1,id);
 
@@ -55,9 +64,29 @@ public class Database {
 
             int count = checkResult.getInt(1);
 
-            System.out.println("Count for person with ID: "+id+ " is "+count);
+            if(count == 0){
+                System.out.println("Inserting person with ID " + id);
+
+                int col = 1;
+                insertStatement.setInt(col++,id);
+                insertStatement.setString(col++,name);
+                insertStatement.setString(col++,age.name());
+                insertStatement.setString(col++,employment.name());
+                insertStatement.setString(col++,tax);
+                insertStatement.setBoolean(col++,isSa);
+                insertStatement.setString(col++, gender.name());
+                insertStatement.setString(col++,occupation);
+
+                insertStatement.executeUpdate();
+            }
+            else {
+                System.out.println("Updating person with ID " + id);
+
+            }
+
         }
 
+        insertStatement.close();
         checkStmt.close();
     }
 
