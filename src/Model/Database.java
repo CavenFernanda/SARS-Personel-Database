@@ -41,10 +41,13 @@ public class Database {
     public void save() throws SQLException {
 
         String checkSql = "Select count(*) as count from people where id =?";//value '?' is ued to protect the database from malicious sql injections
-        PreparedStatement checkStmt = con.prepareStatement(checkSql);//executing mySql commands
+        PreparedStatement checkStmt = con.prepareStatement(checkSql);//select mySql command
 
         String insertSql = "insert into People (id, name,age, employment_status, tax_id,sa_citizenship, gender, occupation) values (?,?,?,?,?,?,?,?)";
-        PreparedStatement insertStatement = con.prepareStatement(insertSql);
+        PreparedStatement insertStatement = con.prepareStatement(insertSql);//insert swl command
+
+        String updateSql = "update People set name =? ,age = ?, employment_status = ?, tax_id = ?,sa_citizenship = ?, gender = ?, occupation = ? where id = ?";
+        PreparedStatement updateStatement = con.prepareStatement(updateSql);//update sql command
 
         //looping through all the values in the linked list of Person
         for(Person person: peopleList){
@@ -82,10 +85,22 @@ public class Database {
             else {
                 System.out.println("Updating person with ID " + id);
 
+                int col = 1;
+                updateStatement.setString(col++,name);
+                updateStatement.setString(col++,age.name());
+                updateStatement.setString(col++,employment.name());
+                updateStatement.setString(col++,tax);
+                updateStatement.setBoolean(col++,isSa);
+                updateStatement.setString(col++, gender.name());
+                updateStatement.setString(col++,occupation);
+                updateStatement.setInt(col++,id);
+
+                updateStatement.executeUpdate();
+
             }
 
         }
-
+        updateStatement.close();
         insertStatement.close();
         checkStmt.close();
     }

@@ -14,7 +14,7 @@ public class TestDatabase {
         }
 
         db.addPerson(new Person("Siya","Financial Analyst", AgeCategory.adult, EmploymentCategory.employed,"777777",true, Gender.male));
-        db.addPerson(new Person("Jenny","Software Engineer", AgeCategory.senior, EmploymentCategory.selfEmployed,"515177",true, Gender.female));
+        db.addPerson(new Person("Jenny","Banker", AgeCategory.adult, EmploymentCategory.selfEmployed,"515177",true, Gender.female));
 
         try {
             db.save();
