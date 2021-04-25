@@ -10,7 +10,7 @@ import java.sql.*;
 //database class that contains an arrayList of people
 public class Database {
 
-    private List<Person> peopleList;
+    private final List<Person> peopleList;
     private Connection con;
 
     public Database() {
@@ -103,6 +103,33 @@ public class Database {
         updateStatement.close();
         insertStatement.close();
         checkStmt.close();
+    }
+
+    public void load() throws SQLException {
+        peopleList.clear();
+
+        String sql = "select id, name,age, employment_status, tax_id,sa_citizenship, gender, occupation from people order by name";
+        Statement selectStatement = con.createStatement();
+        ResultSet results = selectStatement.executeQuery(sql);
+
+        while(results.next()){
+           int id = results.getInt("id");
+           String name = results.getString("name");
+           String age = results.getString("age");
+           String  employment_status = results.getString("employment_status");
+           String tax_id = results.getString("tax_id");
+           boolean sa_citizenship = results.getBoolean("sa_citizenship");
+           String gender = results.getString("gender");
+           String occupation = results.getString("occupation");
+
+           Person person = new Person(id,name,occupation,AgeCategory.valueOf(age),EmploymentCategory.valueOf(employment_status),tax_id,sa_citizenship,Gender.valueOf(gender));
+           peopleList.add(person);
+
+           System.out.println(person);
+        }
+
+        results.close();
+        selectStatement.close();
     }
 
     public void addPerson(Person person) {

@@ -21,6 +21,12 @@ public class TestDatabase {
         } catch (SQLException throwables) {
             System.out.println("Unable to save");
         }
+
+        try {
+            db.load();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         db.disconnect();
     }
 }
