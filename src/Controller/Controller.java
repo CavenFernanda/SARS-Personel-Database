@@ -6,6 +6,7 @@ import Model.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 //Mainframe will call this class when added data to the database
@@ -19,6 +20,22 @@ public class Controller {
 
     public void removePerson(int row) {
         database.removePerson(row);
+    }
+
+    public void save() throws SQLException {
+        database.save();
+    }
+
+    public void load() throws SQLException {
+        database.load();
+    }
+
+    public void connect() throws Exception {
+        database.connect();
+    }
+
+    public void disconnect(){
+        database.disconnect();
     }
 
     public void addPerson(FormEvent ev) {
@@ -49,13 +66,13 @@ public class Controller {
         EmploymentCategory employmentCategory = null;
 
         switch (empCat) {
-            case "employed":
+            case "Employed":
                 employmentCategory = EmploymentCategory.employed;
                 break;
-            case "self-employed":
+            case "Self-Employed":
                 employmentCategory = EmploymentCategory.selfEmployed;
                 break;
-            case "unemployed":
+            case "Unemployed":
                 employmentCategory = EmploymentCategory.unemployed;
                 break;
         }

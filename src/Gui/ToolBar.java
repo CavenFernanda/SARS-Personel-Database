@@ -6,28 +6,28 @@ import java.awt.event.*;
 
 public class ToolBar extends JPanel implements ActionListener {
 
-    private final JButton helloButton;
-    private final JButton byeButton;
+    private final JButton saveButton;
+    private final JButton refreshButton;
 
-    private StringListener textListener;
+    private ToolbarListener textListener;
 
     public ToolBar() {
         
         setBorder(BorderFactory.createEtchedBorder()); //creating a border for the toolBar. Its essenstially a line
-        this.helloButton = new JButton("Hello");
-        this.byeButton = new JButton("Button");
+        this.saveButton = new JButton("Save");
+        this.refreshButton = new JButton("Refresh");
 
-        this.helloButton.addActionListener(this);
-        this.byeButton.addActionListener(this);
+        this.saveButton.addActionListener(this);
+        this.refreshButton.addActionListener(this);
 
         setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        add(this.helloButton);
-        add(this.byeButton);
+        add(this.saveButton);
+        add(this.refreshButton);
     }
 
     //accepts any object that implements the StringLister interface
-    public void setStringLister(StringListener textListener) {
+    public void setToolbarListener(ToolbarListener textListener) {
 
         this.textListener = textListener;
     }
@@ -38,13 +38,13 @@ public class ToolBar extends JPanel implements ActionListener {
 
         JButton clicked = (JButton) e.getSource();
 
-        if (clicked == this.helloButton) {
+        if (clicked == this.saveButton) {
             if (textListener != null) {
-                textListener.textEmitted("Hello!\n");
+                textListener.saveEventOccured();
             }
-        } else if (clicked == this.byeButton) {
+        } else if (clicked == this.refreshButton) {
             if (textListener != null) {
-                textListener.textEmitted("Bye!\n");
+                textListener.refreshEventOccured();
             }
         }
     }
